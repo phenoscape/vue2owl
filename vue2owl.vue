@@ -1,14 +1,14 @@
 <!-- Tufts VUE 3.2.2 concept-map (vue2owl.vue) 2013-07-15 -->
 <!-- Tufts VUE: http://vue.tufts.edu/ -->
 <!-- Do Not Remove: VUE mapping @version(1.1) jar:file:/Applications/VUE.app/Contents/VUE.jar!/tufts/vue/resources/lw_mapping_1_1.xml -->
-<!-- Do Not Remove: Saved date Mon Jul 15 23:18:36 CDT 2013 by jim on platform Mac OS X 10.8.4 in JVM 1.6.0_45-b06-451-11M4406 -->
+<!-- Do Not Remove: Saved date Mon Jul 15 23:22:14 CDT 2013 by jim on platform Mac OS X 10.8.4 in JVM 1.6.0_45-b06-451-11M4406 -->
 <!-- Do Not Remove: Saving version @(#)VUE: built May 23 2013 at 2146 by tomadm on Linux 2.6.18-348.2.1.el5 i386 JVM 1.7.0_21-b11(bits=32) -->
 <?xml version="1.0" encoding="US-ASCII"?>
 <LW-MAP xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="none" ID="0" label="vue2owl.vue"
-    created="1373947488058" x="0.0" y="0.0" width="1.4E-45"
-    height="1.4E-45" strokeWidth="0.0" autoSized="false">
-    <resource referenceCreated="1373948316666" size="31575"
+    created="1373947488058" x="0.0" y="0.0" width="733.0" height="805.5"
+    strokeWidth="0.0" autoSized="false">
+    <resource referenceCreated="1373948534298" size="31575"
         spec="/Users/jim/Work/Source/Eclipse/vue2owl/vue2owl.vue"
         type="1" xsi:type="URLResource">
         <title>vue2owl.vue</title>
@@ -291,7 +291,7 @@
           SubClassOf: d only B</label>
     </child>
     <child ID="23" label="A" layerID="1" created="1373947992583"
-        x="272.5" y="501.0" width="100.0" height="44.0"
+        x="281.5" y="501.0" width="100.0" height="44.0"
         strokeWidth="1.0" autoSized="false" xsi:type="node">
         <fillColor>#FFFFFF</fillColor>
         <strokeColor>#AF55F4</strokeColor>
@@ -532,15 +532,17 @@
         <shape xsi:type="ellipse"/>
     </child>
     <child ID="38" label="d" layerID="1" created="1373948240424"
-        x="171.48016" y="514.5" width="105.03969" height="13.0"
+        x="167.96194" y="516.254" width="114.038055" height="13.0"
         strokeWidth="1.0" autoSized="false" controlCount="0"
         arrowState="2" xsi:type="link">
         <strokeColor>#404040</strokeColor>
         <textColor>#404040</textColor>
         <font>Arial-plain-11</font>
         <URIString>http://vue.tufts.edu/rdf/resource/e5b32da90a0a009e01553d18b0a3d6e7</URIString>
-        <point1 x="171.98015" y="520.8747"/>
-        <point2 x="276.01984" y="521.12537"/>
+        <point1 x="168.46194" y="522.6235"/>
+        <point2 x="281.5" y="522.8845"/>
+        <ID1 xsi:type="node">24</ID1>
+        <ID2 xsi:type="node">23</ID2>
     </child>
     <child ID="39"
         label="Individual: C &#xa;    &#xa;    &#xa;          Facts: d E"
