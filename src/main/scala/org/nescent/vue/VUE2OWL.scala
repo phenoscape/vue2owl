@@ -51,16 +51,22 @@ object VUE2OWL extends App {
 		val source = terms(sourceID);
 		val target = terms(targetID);
 		val relation = (elem \ "@label").headOption.map(attr => factory.getOWLObjectProperty(IRI.create(attr.text)));
-		println(relation);
+		val restrictionFactory = (elem \ "@strokeStyle").headOption.filter(_.text == "4") match {
+		case Some(node) => factory.getOWLObjectAllValuesFrom _;
+		case None => factory.getOWLObjectSomeValuesFrom _;
+		}
 		(source, target, relation) match {
 		case (individual: OWLNamedIndividual, ontClass: OWLClass, None) => {
 			manager.addAxiom(ontology, factory.getOWLClassAssertionAxiom(ontClass, individual));
+		}
+		case (individual: OWLNamedIndividual, ontClass: OWLClass, Some(property)) => {
+			manager.addAxiom(ontology, factory.getOWLClassAssertionAxiom(restrictionFactory(property, ontClass), individual));
 		}
 		case (subclass: OWLClass, superclass: OWLClass, None) => {
 			manager.addAxiom(ontology, factory.getOWLSubClassOfAxiom(subclass, superclass));
 		}
 		case (subclass: OWLClass, superclass: OWLClass, Some(property)) => {
-			manager.addAxiom(ontology, factory.getOWLSubClassOfAxiom(subclass, factory.getOWLObjectSomeValuesFrom(property, superclass)));
+			manager.addAxiom(ontology, factory.getOWLSubClassOfAxiom(subclass, restrictionFactory(property, superclass)));
 		}
 		case _ => {}
 		}
