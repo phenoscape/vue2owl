@@ -20,8 +20,7 @@ import org.semanticweb.owlapi.model.OWLObjectPropertyExpression
 object VUE2OWL extends App {
 
 	val factory = OWLManager.getOWLDataFactory();
-	val manager = OWLManager.createOWLOntologyManager();
-	val ontology = manager.createOntology();
+	val manager = OWLManager.createOWLOntologyManager();	
 	val cleanedInput = Source.fromFile(args(0), "US-ASCII").getLines.dropWhile(_.startsWith("<!--")).mkString;
 	val input = XML.loadString(cleanedInput);
 	def isNode(elem: Node): Boolean = {
@@ -30,6 +29,8 @@ object VUE2OWL extends App {
 	def isLink(elem: Node): Boolean = {
 			(elem \ "@{http://www.w3.org/2001/XMLSchema-instance}type").head.text == "link";
 	}
+	val docIRI = (input \ "URIString").head.text;
+	val ontology = manager.createOntology(IRI.create(docIRI));
 	val terms: mutable.Map[String, OWLEntity] = mutable.Map();
 	(input \ "child").filter(isNode(_)).foreach(elem => {
 		val id = (elem \ "@ID").head.text;
@@ -50,7 +51,7 @@ object VUE2OWL extends App {
 		val targetID = (elem \ "ID2").head.text;
 		val source = terms(sourceID);
 		val target = terms(targetID);
-		val relation = (elem \ "@label").headOption.map(attr => factory.getOWLObjectProperty(IRI.create(attr.text)));
+		val relation = (elem \ "@label").headOption.map(attr => factory.getOWLObjectProperty(IRI.create(docIRI + "#" + attr.text)));
 		val restrictionFactory = (elem \ "@strokeStyle").headOption.filter(_.text == "4") match {
 		case Some(node) => factory.getOWLObjectAllValuesFrom _;
 		case None => factory.getOWLObjectSomeValuesFrom _;
@@ -67,6 +68,9 @@ object VUE2OWL extends App {
 		}
 		case (subclass: OWLClass, superclass: OWLClass, Some(property)) => {
 			manager.addAxiom(ontology, factory.getOWLSubClassOfAxiom(subclass, restrictionFactory(property, superclass)));
+		}
+		case (subject: OWLNamedIndividual, value: OWLNamedIndividual, Some(property)) => {
+			manager.addAxiom(ontology, factory.getOWLObjectPropertyAssertionAxiom(property, subject, value));
 		}
 		case _ => {}
 		}
