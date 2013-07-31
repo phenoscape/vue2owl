@@ -51,7 +51,7 @@ object VUE2OWL extends App {
 		val targetID = (elem \ "ID2").head.text;
 		val source = terms(sourceID);
 		val target = terms(targetID);
-		val relation = (elem \ "@label").headOption.map(attr => factory.getOWLObjectProperty(IRI.create(docIRI + "#" + attr.text)));
+		val relation = (elem \ "@label").headOption.map(attr => factory.getOWLObjectProperty(IRI.create(docIRI + "#" + attr.text.replaceAllLiterally(" ", "_"))));
 		val restrictionFactory = (elem \ "@strokeStyle").headOption.filter(_.text == "4") match {
 		case Some(node) => factory.getOWLObjectAllValuesFrom _;
 		case None => factory.getOWLObjectSomeValuesFrom _;
